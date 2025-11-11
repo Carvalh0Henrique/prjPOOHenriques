@@ -12,7 +12,7 @@ public class Paciente extends Pessoa {
     private double altura;
     private double peso;
 
-    private Paciente(String cpf, String nome, LocalDate dataNascimento){
+    public Paciente(String cpf, String nome, LocalDate dataNascimento){
         super(cpf, nome);
         this.dataNascimento = dataNascimento;
     }
