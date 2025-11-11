@@ -19,7 +19,7 @@ public class Consulta {
         this.codigo = codigo;
         this.data = data;
         
-        exames = new ArrayList<Exame>();
+        exames = new ArrayList<>();
     }
     
     //SETTERS
