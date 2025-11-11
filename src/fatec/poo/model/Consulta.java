@@ -14,12 +14,14 @@ public class Consulta {
     private Medico medico;
     private Paciente paciente;
     private ArrayList<Exame> exames;
+    private ArrayList<Medicacao> medicacoes;
 
     public Consulta(int codigo, String data) {
         this.codigo = codigo;
         this.data = data;
         
         exames = new ArrayList<>();
+        medicacoes = new ArrayList<>();
     }
     
     //SETTERS
@@ -55,10 +57,16 @@ public class Consulta {
     public Paciente getPaciente() {
         return paciente;
     }
-           
+    
+    //ADDERS
     public void addExame(Exame e) {
         exames.add(e);
         e.setConsulta(this);
+    }
+
+    public void addMedicacao(Medicacao m) {
+        medicacoes.add(m);
+        m.setConsulta(this);
     }
     
     public double calcValorTotalPagar() {
