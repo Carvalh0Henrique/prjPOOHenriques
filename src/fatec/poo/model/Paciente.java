@@ -45,16 +45,15 @@ public class Paciente extends Pessoa {
     }
 
     public double calcIMC(){
-        return getPeso() / Math.pow(getAltura(),2);
+        return getPeso() / Math.pow(altura,2);
     }
 
     public int calcIdade(LocalDate dataAtual){
-        return  dataAtual.compareTo(getDataNascimento());
+        return dataAtual.compareTo(getDataNascimento());
     }
     
     public void addConsulta(Consulta c){
         consultas.add(c);
-        c.setPaciente(this);
     }
 
 }
