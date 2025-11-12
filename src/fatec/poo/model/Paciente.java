@@ -1,6 +1,7 @@
 package fatec.poo.model;
 
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 
 /**
@@ -49,7 +50,7 @@ public class Paciente extends Pessoa {
     }
 
     public int calcIdade(LocalDate dataAtual){
-        return dataAtual.compareTo(getDataNascimento());
+        return Period.between(getDataNascimento(), dataAtual).getYears();
     }
     
     public void addConsulta(Consulta c){
