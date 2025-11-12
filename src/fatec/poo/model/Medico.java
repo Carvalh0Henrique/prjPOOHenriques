@@ -17,7 +17,7 @@ public class Medico extends Pessoa {
         this.crm = crm;
         this.especialidade = especialidade;
 
-        this.consultas = new ArrayList<>();
+        consultas = new ArrayList<>();
     }
 
     //GETTERS
