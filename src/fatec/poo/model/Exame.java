@@ -1,5 +1,9 @@
 package fatec.poo.model;
 
+/**
+ *
+ * @author Henrique Andrade
+ */
 public class Exame {
     
     private int codigo;
