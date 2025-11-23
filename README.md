@@ -44,6 +44,8 @@ prjPOOHenriques/
 ├── src/
 │   └── fatec/
 │       └── poo/
+│           ├── basededados/
+│           │
 │           ├── model/
 │           │   ├── Pessoa.java       
 │           │   ├── Medico.java   
@@ -55,7 +57,10 @@ prjPOOHenriques/
 │           ├── view/
 │           │   └── Interfaces JFrame
 │           │
-│           └── controller/
+│           ├── view.icon/
+│           │   └── Ícones da GUI (Grafic User Interface)
+│           │
+│           └── control/
 │                └── Classes que conectam a lógica (Model) com a tela (View)
 │
 └── README.md
