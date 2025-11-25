@@ -2,6 +2,7 @@ package fatec.poo.model;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 /**
@@ -33,8 +34,9 @@ public class Paciente extends Pessoa {
 
 
     //GETTERS
-    public LocalDate getDataNascimento() {
-        return dataNascimento;
+    public String getDataNascimento() {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        return dataNascimento.format(dtf);
     }
 
     public double getAltura() {
@@ -50,7 +52,7 @@ public class Paciente extends Pessoa {
     }
 
     public int calcIdade(LocalDate dataAtual){
-        return Period.between(getDataNascimento(), dataAtual).getYears();
+        return Period.between(dataNascimento, dataAtual).getYears();
     }
     
     public void addConsulta(Consulta c){
