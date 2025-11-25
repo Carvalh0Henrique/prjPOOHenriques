@@ -14,12 +14,12 @@ import javax.swing.JOptionPane;
  *
  * @author carva
  */
-public class GuiMedico extends javax.swing.JFrame {
+public class GuiCadastroMedico extends javax.swing.JFrame {
 
     /**
      * Creates new form GuiMedico
      */
-    public GuiMedico() {
+    public GuiCadastroMedico() {
         initComponents();
     }
 
