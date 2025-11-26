@@ -10,6 +10,7 @@ import fatec.poo.control.PreparaConexao;
 import fatec.poo.model.Paciente;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -293,7 +294,40 @@ public class GuiCadastroPaciente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnConsultarActionPerformed
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
-        // TODO add your handling code here:
+        if (JOptionPane.showConfirmDialog(null, "Confirma Alteração?") == 0){
+          DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+            paciente = new Paciente(txtCpf.getText(), txtNome.getText(), LocalDate.parse(txtDataNascimento.getText(), formatter));
+            paciente.setEndereco(txtEndereco.getText());
+            paciente.setTelefone(txtTelefone.getText());
+            paciente.setAltura(Double.parseDouble(txtAltura.getText()));
+            paciente.setPeso(Double.parseDouble(txtPeso.getText()));
+            daoPaciente.alterar(paciente);
+        }  
+        
+        txtCpf.setText(null);
+        txtNome.setText(null);
+        txtEndereco.setText(null);
+        txtTelefone.setText(null);
+        txtDataNascimento.setText(null);
+        txtAltura.setText(null);
+        txtPeso.setText(null);
+        
+        txtCpf.setEnabled(true);
+        txtNome.setEnabled(false);
+        txtEndereco.setEnabled(false);
+        txtTelefone.setEnabled(false);
+        txtDataNascimento.setEnabled(false);
+        txtAltura.setEnabled(false);
+        txtPeso.setEnabled(false);
+        txtCpf.requestFocus();
+        
+        btnConsultar.setEnabled(true);
+        btnInserir.setEnabled(false);
+        btnAlterar.setEnabled(false);
+        btnExcluir.setEnabled(false);
+        
+        
     }//GEN-LAST:event_btnAlterarActionPerformed
 
     private void txtCpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCpfActionPerformed
