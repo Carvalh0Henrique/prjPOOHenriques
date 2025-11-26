@@ -124,6 +124,11 @@ public class GuiCadastroPaciente extends javax.swing.JFrame {
         btnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fatec/poo/view/icon/Eraser.png"))); // NOI18N
         btnExcluir.setText("Excluir");
         btnExcluir.setEnabled(false);
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
 
         btnSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fatec/poo/view/icon/exit.png"))); // NOI18N
         btnSair.setText("Sair");
@@ -388,6 +393,34 @@ public class GuiCadastroPaciente extends javax.swing.JFrame {
         btnAlterar.setEnabled(false);
         btnExcluir.setEnabled(false);
     }//GEN-LAST:event_btnInserirActionPerformed
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        if (JOptionPane.showConfirmDialog(null, "Confirma Exclusão?") == 0){
+            daoPaciente.excluir(paciente); 
+            
+            txtCpf.setText(null);
+            txtNome.setText(null);
+            txtEndereco.setText(null);
+            txtTelefone.setText(null);
+            txtDataNascimento.setText(null);
+            txtAltura.setText(null);
+            txtPeso.setText(null);  
+        
+            txtCpf.setEnabled(true);
+            txtNome.setEnabled(false);
+            txtEndereco.setEnabled(false);
+            txtTelefone.setEnabled(false);
+            txtDataNascimento.setEnabled(false);
+            txtAltura.setEnabled(false);
+            txtPeso.setEnabled(false);
+            txtCpf.requestFocus();
+        
+            btnConsultar.setEnabled(true);
+            btnInserir.setEnabled(false);
+            btnAlterar.setEnabled(false);
+            btnExcluir.setEnabled(false);
+        }
+    }//GEN-LAST:event_btnExcluirActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
