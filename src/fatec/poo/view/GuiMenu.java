@@ -51,6 +51,11 @@ public class GuiMenu extends javax.swing.JFrame {
         jMenuCadastro.add(jMenuItemMedico);
 
         jMenuItemPaciente.setText("Paciente");
+        jMenuItemPaciente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemPacienteActionPerformed(evt);
+            }
+        });
         jMenuCadastro.add(jMenuItemPaciente);
 
         jMenuItemSair.setText("Sair");
@@ -100,6 +105,10 @@ public class GuiMenu extends javax.swing.JFrame {
     private void jMenuItemSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSairActionPerformed
         dispose();
     }//GEN-LAST:event_jMenuItemSairActionPerformed
+
+    private void jMenuItemPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemPacienteActionPerformed
+        new GuiCadastroPaciente().setVisible(true);
+    }//GEN-LAST:event_jMenuItemPacienteActionPerformed
 
     /**
      * @param args the command line arguments
