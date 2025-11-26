@@ -45,4 +45,22 @@ public class DaoPaciente {
         }
         return(p);
     }
+    
+    public void inserir(Paciente paciente){
+        PreparedStatement ps = null;
+        
+        try {
+            ps = conn.prepareStatement("INSERT INTO tbPaciente(cpf, nome, endereco, telefone, data_nascimento, altura, peso) VALUES (?,?,?,?,?,?)");
+            
+            ps.setString(1, paciente.getCpf());
+            ps.setString(1, paciente.getNome());
+            ps.setString(1, paciente.getEndereco());
+            ps.setString(1, paciente.getTelefone());
+            ps.setString(1, paciente.getDataNascimento());
+            ps.setDouble(1, paciente.getAltura());
+            ps.setDouble(1, paciente.getPeso());
+        } catch(SQLException ex) {
+            System.out.println(ex.toString());
+        }
+    }
 }
