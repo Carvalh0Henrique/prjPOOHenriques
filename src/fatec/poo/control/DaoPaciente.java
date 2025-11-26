@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 
 /**
  *
@@ -33,7 +34,7 @@ public class DaoPaciente {
             ResultSet rs = ps.executeQuery();
             
             if(rs.next()) {
-                p = new Paciente(rs.getString("cpf"), rs.getString("nome"), rs.getObject("data_nascimento", LocalDate.clas));
+                p = new Paciente(rs.getString("cpf"), rs.getString("nome"), rs.getObject("data_nascimento", LocalDate.class));
                 p.setEndereco(rs.getString("endereco"));
                 p.setTelefone(rs.getString("telefone"));
                 p.setAltura(rs.getDouble("altura"));
