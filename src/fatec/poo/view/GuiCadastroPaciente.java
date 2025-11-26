@@ -5,6 +5,10 @@
  */
 package fatec.poo.view;
 
+import fatec.poo.control.DaoPaciente;
+import fatec.poo.control.PreparaConexao;
+import fatec.poo.model.Paciente;
+
 /**
  *
  * @author h-and-rod
@@ -63,18 +67,25 @@ public class GuiCadastroPaciente extends javax.swing.JFrame {
 
         jLabel7.setText("Peso");
 
+        txtAltura.setEnabled(false);
+
+        txtPeso.setEnabled(false);
         txtPeso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtPesoActionPerformed(evt);
             }
         });
 
+        txtTelefone.setEnabled(false);
+
+        txtEndereco.setEnabled(false);
         txtEndereco.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtEnderecoActionPerformed(evt);
             }
         });
 
+        txtNome.setEnabled(false);
         txtNome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNomeActionPerformed(evt);
@@ -91,9 +102,11 @@ public class GuiCadastroPaciente extends javax.swing.JFrame {
 
         btnInserir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fatec/poo/view/icon/add.png"))); // NOI18N
         btnInserir.setText("Inserir");
+        btnInserir.setEnabled(false);
 
         btnAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fatec/poo/view/icon/Alterar.png"))); // NOI18N
         btnAlterar.setText("Alterar");
+        btnAlterar.setEnabled(false);
         btnAlterar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAlterarActionPerformed(evt);
@@ -102,6 +115,7 @@ public class GuiCadastroPaciente extends javax.swing.JFrame {
 
         btnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fatec/poo/view/icon/Eraser.png"))); // NOI18N
         btnExcluir.setText("Excluir");
+        btnExcluir.setEnabled(false);
 
         btnSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fatec/poo/view/icon/exit.png"))); // NOI18N
         btnSair.setText("Sair");
@@ -127,6 +141,7 @@ public class GuiCadastroPaciente extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        txtDataNascimento.setEnabled(false);
         txtDataNascimento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtDataNascimentoActionPerformed(evt);
@@ -152,11 +167,10 @@ public class GuiCadastroPaciente extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(txtDataNascimento, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
-                                .addComponent(txtPeso, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtAltura, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtTelefone, javax.swing.GroupLayout.Alignment.LEADING))
+                            .addComponent(txtDataNascimento, javax.swing.GroupLayout.DEFAULT_SIZE, 433, Short.MAX_VALUE)
+                            .addComponent(txtPeso)
+                            .addComponent(txtAltura)
+                            .addComponent(txtTelefone)
                             .addComponent(txtNome, javax.swing.GroupLayout.DEFAULT_SIZE, 433, Short.MAX_VALUE)
                             .addComponent(txtEndereco)))
                     .addGroup(layout.createSequentialGroup()
@@ -229,7 +243,46 @@ public class GuiCadastroPaciente extends javax.swing.JFrame {
     }//GEN-LAST:event_txtPesoActionPerformed
 
     private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
-        // TODO add your handling code here:
+        paciente = null;
+        
+        paciente = daoPaciente.consultar(txtCpf.getText().replace(".", "").replace("-", ""));      
+        if(paciente == null) {
+            txtCpf.setEnabled(false);
+            txtNome.setEnabled(true);    
+            txtNome.requestFocus();
+            txtEndereco.setEnabled(true);
+            txtTelefone.setEnabled(true);
+            txtDataNascimento.setEnabled(true);
+            txtAltura.setEnabled(true);
+            txtPeso.setEnabled(true);
+            
+            btnConsultar.setEnabled(false);
+            btnInserir.setEnabled(true);
+            btnAlterar.setEnabled(false);
+            btnExcluir.setEnabled(false);
+            
+        } else {
+            txtNome.setText(paciente.getNome());
+            txtEndereco.setText(paciente.getEndereco());
+            txtTelefone.setText(paciente.getTelefone());
+            txtDataNascimento.setText(String.valueOf(paciente.getDataNascimento()));
+            txtAltura.setText(String.valueOf(paciente.getAltura()));
+            txtPeso.setText(String.valueOf(paciente.getPeso()));
+
+            txtCpf.setEnabled(false);
+            txtNome.setEnabled(true);
+            txtNome.requestFocus();
+            txtEndereco.setEnabled(true);
+            txtTelefone.setEnabled(true);
+            txtDataNascimento.setEnabled(true);
+            txtAltura.setEnabled(true);
+            txtPeso.setEnabled(true);
+            
+            btnConsultar.setEnabled(false);
+            btnInserir.setEnabled(false);
+            btnAlterar.setEnabled(true);
+            btnExcluir.setEnabled(true);
+        }
     }//GEN-LAST:event_btnConsultarActionPerformed
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
@@ -248,40 +301,19 @@ public class GuiCadastroPaciente extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtDataNascimentoActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GuiCadastroPaciente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GuiCadastroPaciente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GuiCadastroPaciente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GuiCadastroPaciente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+       prepCon = new PreparaConexao("", "");
+       prepCon.setDriver("net.ucanaccess.jdbc.UcanaccessDriver");
+       prepCon.setConnectionString("jdbc:ucanaccess://" + System.getProperty("user.dir") + "\\src\\fatec\\poo\\basededados\\BDClinica.accdb");
+       daoPaciente = new DaoPaciente(prepCon.abrirConexao());
+    }//GEN-LAST:event_formWindowOpened
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new GuiCadastroPaciente().setVisible(true);
-            }
-        });
-    }
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        if (prepCon != null) {
+            prepCon.fecharConexao();
+        }
+    }//GEN-LAST:event_formWindowClosing
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterar;
@@ -304,4 +336,7 @@ public class GuiCadastroPaciente extends javax.swing.JFrame {
     private javax.swing.JTextField txtPeso;
     private javax.swing.JTextField txtTelefone;
     // End of variables declaration//GEN-END:variables
+    private PreparaConexao prepCon = null; 
+    private DaoPaciente daoPaciente = null;
+    private Paciente paciente = null;
 }
