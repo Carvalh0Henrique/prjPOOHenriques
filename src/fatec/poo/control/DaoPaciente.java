@@ -88,5 +88,19 @@ public class DaoPaciente {
             System.out.println(ex.toString());
         }
     }   
+    
+    public void excluir(Paciente paciente) {
+        PreparedStatement ps = null;
+        
+        try {
+            ps = conn.prepareStatement("DELETE FROM tbPaciente WHERE cpf = ?");
+            
+            ps.setString(1, paciente.getCpf());
+            
+            ps.execute();
+        } catch(SQLException ex) {
+            System.out.println(ex.toString());
+        }
+    }
 
 }
