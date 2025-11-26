@@ -18,40 +18,42 @@ import java.time.LocalDate;
  */
 public class DaoPaciente {
     private Connection conn;
-    
-    public DaoPaciente(Connection conn){
+
+    public DaoPaciente(Connection conn) {
         this.conn = conn;
     }
-    
-    public Paciente consultar(String cpf){
+
+    public Paciente consultar(String cpf) {
         PreparedStatement ps = null;
         Paciente p = null;
-        
-        try{
+
+        try {
             ps = conn.prepareStatement("SELECT * FROM tbPaciente WHERE " + "cpf = ?");
             ps.setString(1, cpf);
-            
+
             ResultSet rs = ps.executeQuery();
-            
-            if(rs.next()) {
-                p = new Paciente(rs.getString("cpf"), rs.getString("nome"), rs.getObject("data_nascimento", LocalDate.class));
+
+            if (rs.next()) {
+                p = new Paciente(rs.getString("cpf"), rs.getString("nome"),
+                        rs.getObject("data_nascimento", LocalDate.class));
                 p.setEndereco(rs.getString("endereco"));
                 p.setTelefone(rs.getString("telefone"));
                 p.setAltura(rs.getDouble("altura"));
                 p.setPeso(rs.getDouble("peso"));
             }
-        } catch(SQLException ex){
+        } catch (SQLException ex) {
             System.out.println(ex.toString());
         }
-        return(p);
+        return (p);
     }
-    
-    public void inserir(Paciente paciente){
+
+    public void inserir(Paciente paciente) {
         PreparedStatement ps = null;
-        
+
         try {
-            ps = conn.prepareStatement("INSERT INTO tbPaciente(cpf, nome, endereco, telefone, data_nascimento, altura, peso) VALUES (?,?,?,?,?,?)");
-            
+            ps = conn.prepareStatement(
+                    "INSERT INTO tbPaciente(cpf, nome, endereco, telefone, data_nascimento, altura, peso) VALUES (?,?,?,?,?,?)");
+
             ps.setString(1, paciente.getCpf());
             ps.setString(1, paciente.getNome());
             ps.setString(1, paciente.getEndereco());
@@ -59,8 +61,32 @@ public class DaoPaciente {
             ps.setString(1, paciente.getDataNascimento());
             ps.setDouble(1, paciente.getAltura());
             ps.setDouble(1, paciente.getPeso());
-        } catch(SQLException ex) {
+        } catch (SQLException ex) {
             System.out.println(ex.toString());
         }
     }
+    
+    public void alterar(Paciente paciente) {
+    PreparedStatement ps = null;
+
+        try {
+            ps = conn.prepareStatement(
+                "UPDATE tbPaciente SET nome = ?, endereco = ?, telefone = ?, data_nascimento = ?, altura = ?, peso = ? " +
+                "WHERE cpf = ?"
+            );
+
+            ps.setString(1, paciente.getNome());
+            ps.setString(2, paciente.getEndereco());
+            ps.setString(3, paciente.getTelefone());
+            ps.setObject(4, paciente.getDataNascimento());
+            ps.setDouble(5, paciente.getAltura());
+            ps.setDouble(6, paciente.getPeso());
+            ps.setString(7, paciente.getCpf());
+
+            ps.execute();
+        } catch (SQLException ex) {
+            System.out.println(ex.toString());
+        }
+    }   
+
 }
