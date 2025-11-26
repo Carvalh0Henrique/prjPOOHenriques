@@ -22,6 +22,26 @@ public class DaoPaciente {
         this.conn = conn;
     }
     
-    
+    public Paciente consultar(String cpf){
+        PreparedStatement ps = null;
+        Paciente p = null;
+        
+        try{
+            ps = conn.prepareStatement("SELECT * FROM tbPaciente WHERE " + "cpf = ?");
+            ps.setString(1, cpf);
+            
+            ResultSet rs = ps.executeQuery();
+            
+            if(rs.next()) {
+                p = new Paciente(rs.getString("cpf"), rs.getString("nome"), rs.getObject("data_nascimento", LocalDate.clas));
+                p.setEndereco(rs.getString("endereco"));
+                p.setTelefone(rs.getString("telefone"));
+                p.setAltura(rs.getDouble("altura"));
+                p.setPeso(rs.getDouble("peso"));
+            }
+        } catch(SQLException ex){
+            System.out.println(ex.toString());
+        }
+        return(p);
     }
 }
