@@ -55,6 +55,15 @@ public class GuiCadastroPaciente extends javax.swing.JFrame {
         txtDataNascimento = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Cadastro Paciente");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jLabel1.setText("CPF");
 
@@ -278,7 +287,7 @@ public class GuiCadastroPaciente extends javax.swing.JFrame {
             txtNome.setText(paciente.getNome());
             txtEndereco.setText(paciente.getEndereco());
             txtTelefone.setText(paciente.getTelefone());
-            txtDataNascimento.setText(String.valueOf(paciente.getDataNascimento()));
+            txtDataNascimento.setText(paciente.getDataNascimento());
             txtAltura.setText(String.valueOf(paciente.getAltura()));
             txtPeso.setText(String.valueOf(paciente.getPeso()));
 
@@ -299,12 +308,14 @@ public class GuiCadastroPaciente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnConsultarActionPerformed
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        
         if (JOptionPane.showConfirmDialog(null, "Confirma Alteração?") == 0){
-          DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-
-            paciente = new Paciente(txtCpf.getText(), txtNome.getText(), LocalDate.parse(txtDataNascimento.getText(), formatter));
+            
+            paciente.setNome(txtNome.getText());
             paciente.setEndereco(txtEndereco.getText());
             paciente.setTelefone(txtTelefone.getText());
+            paciente.setDataNascimento(LocalDate.parse(txtDataNascimento.getText(), formatter));
             paciente.setAltura(Double.parseDouble(txtAltura.getText()));
             paciente.setPeso(Double.parseDouble(txtPeso.getText()));
             daoPaciente.alterar(paciente);
@@ -355,15 +366,13 @@ public class GuiCadastroPaciente extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowOpened
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        if (prepCon != null) {
-            prepCon.fecharConexao();
-        }
+ 
     }//GEN-LAST:event_formWindowClosing
 
     private void btnInserirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInserirActionPerformed
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-        paciente = new Paciente(txtCpf.getText(), txtNome.getText(), LocalDate.parse(txtDataNascimento.getText(), formatter));
+        paciente = new Paciente(txtCpf.getText().replace(".", "").replace("-", ""), txtNome.getText(), LocalDate.parse(txtDataNascimento.getText(), formatter));
         paciente.setEndereco(txtEndereco.getText());
         paciente.setTelefone(txtTelefone.getText());
         paciente.setAltura(Double.parseDouble(txtAltura.getText()));
@@ -421,6 +430,10 @@ public class GuiCadastroPaciente extends javax.swing.JFrame {
             btnExcluir.setEnabled(false);
         }
     }//GEN-LAST:event_btnExcluirActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        prepCon.fecharConexao();
+    }//GEN-LAST:event_formWindowClosed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
