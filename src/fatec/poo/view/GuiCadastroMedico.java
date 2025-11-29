@@ -132,11 +132,6 @@ public class GuiCadastroMedico extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        txtCpf.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCpfActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -232,7 +227,10 @@ public class GuiCadastroMedico extends javax.swing.JFrame {
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
         if (JOptionPane.showConfirmDialog(null, "Confirma Alteração?") == 0){
-           medico = new Medico(txtCrm.getText(), cbxEspecialidade.getSelectedItem().toString(), txtCpf.getText().replace(".", "").replace("-", ""), txtNome.getText());
+                    
+           medico.setCrm(txtCrm.getText());
+           medico.setNome(txtNome.getText());
+           medico.setEspecialidade(cbxEspecialidade.getSelectedItem().toString());
            medico.setEndereco(txtEndereco.getText());
            medico.setTelefone(txtTelefone.getText());
            daoMedico.alterar(medico);
@@ -369,10 +367,6 @@ public class GuiCadastroMedico extends javax.swing.JFrame {
             btnExcluir.setEnabled(false);
         }
     }//GEN-LAST:event_btnExcluirActionPerformed
-
-    private void txtCpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCpfActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtCpfActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
