@@ -83,6 +83,11 @@ public class GuiMenu extends javax.swing.JFrame {
 
         jMenuItemPrescreverMedicacao.setText("Prescrever Medicacao");
         jMenuItemPrescreverMedicacao.setToolTipText("");
+        jMenuItemPrescreverMedicacao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemPrescreverMedicacaoActionPerformed(evt);
+            }
+        });
         jMenuRegistro.add(jMenuItemPrescreverMedicacao);
 
         jMenuBar1.add(jMenuRegistro);
@@ -114,10 +119,6 @@ public class GuiMenu extends javax.swing.JFrame {
     private void jMenuItemPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemPacienteActionPerformed
         new GuiCadastroPaciente().setVisible(true);
     }//GEN-LAST:event_jMenuItemPacienteActionPerformed
-
-    private void jMenuItemMarcarConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemMarcarConsultaActionPerformed
-        new GuiMarcarConsulta().setVisible(true);
-    }//GEN-LAST:event_jMenuItemMarcarConsultaActionPerformed
 
     /**
      * @param args the command line arguments
