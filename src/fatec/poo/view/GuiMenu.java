@@ -120,6 +120,14 @@ public class GuiMenu extends javax.swing.JFrame {
         new GuiCadastroPaciente().setVisible(true);
     }//GEN-LAST:event_jMenuItemPacienteActionPerformed
 
+    private void jMenuItemMarcarConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemMarcarConsultaActionPerformed
+        new GuiMarcarConsulta().setVisible(true);
+    }//GEN-LAST:event_jMenuItemMarcarConsultaActionPerformed
+
+    private void jMenuItemPrescreverMedicacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemPrescreverMedicacaoActionPerformed
+        new GuiPrescreverMedicacao().setVisible(true);
+    }//GEN-LAST:event_jMenuItemPrescreverMedicacaoActionPerformed
+
     /**
      * @param args the command line arguments
      */
