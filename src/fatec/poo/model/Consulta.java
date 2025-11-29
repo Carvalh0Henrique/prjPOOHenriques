@@ -24,6 +24,11 @@ public class Consulta {
     }
     
     //SETTERS
+    public void setData(String data) {
+        this.data = data;
+    }
+    
+    
     public void setValor(double valor) {
         this.valor = valor;
     }

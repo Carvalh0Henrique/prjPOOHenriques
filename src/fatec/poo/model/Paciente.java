@@ -22,7 +22,6 @@ public class Paciente extends Pessoa {
         consultas = new ArrayList<Consulta>();
     }
 
-
     //SETTERS
     public void setAltura(double altura) {
         this.altura = altura;
@@ -32,6 +31,10 @@ public class Paciente extends Pessoa {
         this.peso = peso;
     }
 
+    public void setDataNascimento(LocalDate dataNascimento) {
+        this.dataNascimento = dataNascimento;
+    }
+    
 
     //GETTERS
     public String getDataNascimento() {
