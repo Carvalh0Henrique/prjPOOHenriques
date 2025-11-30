@@ -5,6 +5,7 @@
  */
 package fatec.poo.control;
 
+import fatec.poo.model.Consulta;
 import fatec.poo.model.Medicacao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -23,15 +24,16 @@ public class DaoMedicacao {
         this.conn = conn;
     }
     
-    public void inserir (Medicacao medicacao){
+    public void inserir (Medicacao medicacao, Consulta consulta){
         PreparedStatement ps = null;
         
         try{
-            ps = conn.prepareStatement("INSERT INTO tbMedicacao(nome, dosagem, qtdeDias) VALUES (?, ?, ?)");
+            ps = conn.prepareStatement("INSERT INTO tbMedicacao(nome, dosagem, qtdeDias, FK_codigoConsulta) VALUES (?, ?, ?, ?)");
             
             ps.setString(1, medicacao.getNome());
             ps.setString(2, medicacao.getDosagem());
             ps.setInt(3, medicacao.getQtdeDias());
+            ps.setInt(4, consulta.getCodigo());
             
             ps.execute();
         }catch (SQLException ex){
@@ -53,15 +55,14 @@ public class DaoMedicacao {
            if (rs.next()){
                medicacao = new Medicacao(nome);
                medicacao.setDosagem(rs.getString("dosagem"));
-               medicacao.setQtdeDias(rs.getInt("qtdeDias"));
+               medicacao.setQtdeDias(rs.getInt("qtdeDias"));  
            }                             
        } catch (SQLException ex){
            System.out.println(ex.toString());
        }
        
-       return medicacao;
-              
-    }
+       return medicacao;         
+    } 
     
     public void alterar(Medicacao medicacao){
         PreparedStatement ps = null;
