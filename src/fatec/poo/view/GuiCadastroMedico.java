@@ -288,7 +288,7 @@ public class GuiCadastroMedico extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
        prepCon = new PreparaConexao("","");                          
        prepCon.setDriver("net.ucanaccess.jdbc.UcanaccessDriver");
-       prepCon.setConnectionString("jdbc:ucanaccess://C:\\Users\\carva\\Documents\\NetBeansProjects\\prjPOOHenriqueHenrique\\src\\fatec\\poo\\basededados\\BDClinica.accdb" );
+       prepCon.setConnectionString("jdbc:ucanaccess://F:\\learning_development\\prjPOOHenriqueHenrique\\src\\fatec\\poo\\basededados\\BDClinica.accdb" );
        daoMedico = new DaoMedico(prepCon.abrirConexao());
     }//GEN-LAST:event_formWindowOpened
 

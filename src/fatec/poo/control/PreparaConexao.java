@@ -35,10 +35,10 @@ public class PreparaConexao {
                   connection = DriverManager.getConnection(connectionString, usuario, senha);               
 	          System.out.println("[Conexão OK]");
                   
-            } catch (Exception ex) {
-                  System.out.println("Falha na Abertura da Conexão");
-                  System.out.println(ex.toString() + ex.getMessage());
-            }
+          } catch (Exception ex) {
+               System.out.println("Falha na Abertura da Conexão");
+               System.out.println(ex.toString() + ex.getMessage());
+          }
 	}
        
 	return connection;
@@ -48,9 +48,9 @@ public class PreparaConexao {
 	try {
               connection.close();
               System.out.println("[Conexão Encerrada]");
-        } catch (Exception ex) {
-            System.out.println("Falha no Encerramento da Conexão");
-            System.out.println(ex.toString() + ex.getMessage());    
-        }
+          } catch (Exception ex) {
+               System.out.println("Falha no Encerramento da Conexão");
+               System.out.println(ex.toString() + ex.getMessage());
+          }
     }
 }
