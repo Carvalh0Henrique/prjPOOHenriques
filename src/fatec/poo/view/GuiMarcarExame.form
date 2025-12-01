@@ -61,23 +61,21 @@
                       </Group>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="txtValor" pref="534" max="32767" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="txtCodigoExame" pref="148" max="32767" attributes="0"/>
-                                      <Component id="txtCodigoConsulta" max="32767" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="btnConsultarMedico" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="lblNomeMedico" min="-2" pref="266" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="txtCodigoExame" pref="148" max="32767" attributes="0"/>
+                                  <Component id="txtCodigoConsulta" max="32767" attributes="0"/>
                               </Group>
-                              <Component id="txtDescricao" alignment="0" max="32767" attributes="0"/>
-                              <Component id="txtHorario" alignment="0" max="32767" attributes="0"/>
-                              <Component id="txtData" alignment="0" pref="534" max="32767" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="btnConsultarMedico" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="lblNomeMedico" min="-2" pref="266" max="-2" attributes="0"/>
                           </Group>
+                          <Component id="txtDescricao" alignment="0" max="32767" attributes="0"/>
+                          <Component id="txtHorario" alignment="0" max="32767" attributes="0"/>
+                          <Component id="txtData" alignment="0" pref="534" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>

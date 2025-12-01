@@ -10,6 +10,7 @@ import fatec.poo.control.DaoExame;
 import fatec.poo.control.PreparaConexao;
 import fatec.poo.model.Consulta;
 import fatec.poo.model.Exame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -288,14 +289,49 @@ public class GuiMarcarExame extends javax.swing.JFrame {
             txtData.setEnabled(true);
             txtHorario.setEnabled(true);
             txtValor.setEnabled(true);
+            btnAlterar.setEnabled(true);
+            btnExcluir.setEnabled(true);
         }
     }//GEN-LAST:event_btnConsultarActionPerformed
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
+        if (JOptionPane.showConfirmDialog(null, "Confirma Alteração?") == 0){
+            exame = new Exame(Integer.parseInt(txtCodigoExame.getText()), txtDescricao.getText());
+            exame.setData(txtData.getText());
+            exame.setHorario(txtHorario.getText());
+            exame.setValor(Double.parseDouble(txtValor.getText()));
+            exame.setConsulta(consulta);
+            
+            daoExame.alterar(exame);
+        }
         
+        txtCodigoExame.setText(null);
+        txtCodigoConsulta.setText(null);
+        lblNomeMedico.setText(null);
+        txtDescricao.setText(null);
+        txtData.setText(null);
+        txtHorario.setText(null);
+        txtValor.setText(null);
+        
+        btnAlterar.setEnabled(false);
+        btnExcluir.setEnabled(false);
     }//GEN-LAST:event_btnAlterarActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        if(JOptionPane.showConfirmDialog(null, "Confirma Exclusão?") == 0){
+            daoExame.excluir(exame);
+        }
+        
+        txtCodigoExame.setText(null);
+        txtCodigoConsulta.setText(null);
+        lblNomeMedico.setText(null);
+        txtDescricao.setText(null);
+        txtData.setText(null);
+        txtHorario.setText(null);
+        txtValor.setText(null);
+        
+        btnAlterar.setEnabled(false);
+        btnExcluir.setEnabled(false);
         
     }//GEN-LAST:event_btnExcluirActionPerformed
 
@@ -306,7 +342,7 @@ public class GuiMarcarExame extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         prepCon = new PreparaConexao("","");                          
         prepCon.setDriver("net.ucanaccess.jdbc.UcanaccessDriver");
-        prepCon.setConnectionString("jdbc:ucanaccess://C:\\Users\\carva\\Documents\\NetBeansProjects\\prjPOOHenriqueHenrique\\src\\fatec\\poo\\basededados\\BDClinica.accdb" );
+        prepCon.setConnectionString("jdbc:ucanaccess://F:\\learning_development\\DimasUltimaVersao\\prjPOOHenriqueHenrique\\src\\fatec\\poo\\basededados\\BDClinica.accdb" );
         daoExame = new DaoExame(prepCon.abrirConexao());
         daoConsulta = new DaoConsulta(prepCon.abrirConexao());
     }//GEN-LAST:event_formWindowOpened
