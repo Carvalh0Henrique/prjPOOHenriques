@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package fatec.poo.control;
 
 import fatec.poo.model.Exame;
@@ -16,7 +12,11 @@ import java.sql.SQLException;
  * @author h-and-rod
  */
 public class DaoExame {
-    Connection conn = null;
+    private Connection conn;
+
+    public DaoExame(Connection conn) {
+        this.conn = conn;
+    }    
     
     public void inserir(Exame exame){
         PreparedStatement ps = null;
@@ -37,6 +37,26 @@ public class DaoExame {
         }
     } 
     
+    public void alterar(Exame exame){
+        PreparedStatement ps = null;
+        
+        try{
+            ps = conn.prepareStatement("UPDATE tbExame SET descricao = ?, data = ?, horario = ?, valor = ?" + 
+                                       "WHERE codigo = ?");
+            
+            ps.setString(1, exame.getDescricao());
+            ps.setString(2, exame.getData());
+            ps.setString(3, exame.getHorario());
+            ps.setDouble(4, exame.getValor());
+            ps.setInt(5, exame.getCodigo());
+            
+            ps.execute();
+            
+        } catch (SQLException ex) {
+            System.out.println(ex.toString());
+        }
+    }
+    
     public Exame consultar(int codigo){
         Exame exame = null;
         PreparedStatement ps = null;
@@ -52,6 +72,9 @@ public class DaoExame {
                 exame.setData(rs.getString("data"));
                 exame.setHorario(rs.getString("horario"));
                 exame.setValor(rs.getDouble("valor"));
+                
+                DaoConsulta daoConsulta = new DaoConsulta(conn);
+                exame.setConsulta(daoConsulta.consultar(Integer.parseInt(rs.getString("FK_codigoConsulta"))));
             }
             
         } catch (SQLException ex) {
@@ -74,27 +97,4 @@ public class DaoExame {
             System.out.println(ex.toString());
         }
     }
-    
-    public void alterar(Exame exame){
-        PreparedStatement ps = null;
-        
-        try{
-            ps = conn.prepareStatement("UPDATE tbExame SET descricao = ?, data = ?, horario = ?, valor = ?" + 
-                                       "WHERE codigo = ?");
-            
-            ps.setString(1, exame.getDescricao());
-            ps.setString(2, exame.getData());
-            ps.setString(3, exame.getHorario());
-            ps.setDouble(4, exame.getValor());
-            ps.setInt(5, exame.getCodigo());
-            
-            ps.execute();
-            
-        } catch (SQLException ex) {
-            System.out.println(ex.toString());
-        }
-    }
-    
-    
-    
 }
