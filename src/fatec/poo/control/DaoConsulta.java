@@ -2,7 +2,6 @@
 package fatec.poo.control;
 
 import fatec.poo.model.Consulta;
-import fatec.poo.model.Medico;
 import fatec.poo.model.Paciente;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -79,7 +78,9 @@ public class DaoConsulta {
             
             if (rs.next()) {
                 c = new Consulta(codigo, rs.getString("Data"));
-                c.setValor(rs.getDouble("Valor"));               
+                c.setValor(rs.getDouble("Valor"));   
+                DaoMedico daoMedico = new DaoMedico(conn);
+                c.setMedico(daoMedico.consultar(rs.getString("FK_cpfMedico")));
             }
             
         } catch (SQLException ex) {
@@ -88,27 +89,7 @@ public class DaoConsulta {
         return c;
     }
     
-    public Medico buscarMedicoDaConsulta(int codigo) {
-        Medico m = null;
-        PreparedStatement ps = null;
-        try {
-            ps = conn.prepareStatement("SELECT FK_cpfMedico FROM tbConsulta WHERE Codigo = ?");
-            ps.setInt(1, codigo);
-            ResultSet rs = ps.executeQuery();
-            
-            if (rs.next()) {
-                String cpf = rs.getString("FK_cpfMedico");
-                
-                DaoMedico dao = new DaoMedico(conn);
-                m = dao.consultar(cpf);
-            }
-        } catch (SQLException ex) {
-            System.out.println(ex.toString());
-        }
-        return m;
-    }
-    
-    public Paciente buscarPacienteDaConsulta(int codigo) {
+    public Paciente buscarPacienteConsulta(int codigo) {
         Paciente p = null;
         PreparedStatement ps = null;
         try {
@@ -126,5 +107,4 @@ public class DaoConsulta {
         }
         return p;
     }
-
 }

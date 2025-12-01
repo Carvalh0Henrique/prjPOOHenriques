@@ -171,20 +171,12 @@ public class GuiMarcarConsulta extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2))
-                        .addGap(26, 26, 26))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel3)
-                            .addGap(18, 18, 18))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel5)
-                                .addComponent(jLabel4))
-                            .addGap(56, 56, 56))))
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -269,8 +261,8 @@ public class GuiMarcarConsulta extends javax.swing.JFrame {
 
     private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
         consulta = null;
-        int medCodigo = Integer.parseInt(txtCodigo.getText());
-        consulta = daoConsulta.consultar(medCodigo);
+        int valCodConsulta = Integer.parseInt(txtCodigo.getText());
+        consulta = daoConsulta.consultar(valCodConsulta);
        
         if(consulta == null){
             txtCpfMedico.setEnabled(true);
@@ -278,18 +270,14 @@ public class GuiMarcarConsulta extends javax.swing.JFrame {
             btnConsultar.setEnabled(false);
             txtCpfMedico.requestFocus();
         }else{
-           txtCodigo.setText(String.valueOf(consulta.getCodigo()));
-           txtData.setText(consulta.getData());
-           txtValor.setText(String.valueOf(consulta.getValor()));
-           
-           medico = daoConsulta.buscarMedicoDaConsulta(medCodigo);
-           paciente = daoConsulta.buscarPacienteDaConsulta(medCodigo);
-           
-            if (medico != null) {
-                txtCpfMedico.setText(medico.getCpf());
-                lblNomeMedico.setText(medico.getNome());
-            }
-            
+            txtCodigo.setText(String.valueOf(consulta.getCodigo()));
+            txtData.setText(consulta.getData());
+            txtValor.setText(String.valueOf(consulta.getValor()));
+            txtCpfMedico.setText(consulta.getMedico().getCpf());
+            lblNomeMedico.setText(consulta.getMedico().getNome());          
+
+            paciente = daoConsulta.buscarPacienteConsulta(valCodConsulta);
+
             if (paciente != null) {
                 txtCpfPaciente.setText(paciente.getCpf());
                 lblNomePaciente.setText(paciente.getNome());
