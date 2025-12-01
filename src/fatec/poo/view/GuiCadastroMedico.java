@@ -8,6 +8,7 @@ package fatec.poo.view;
 import fatec.poo.control.DaoMedico;
 import fatec.poo.control.PreparaConexao;
 import fatec.poo.model.Medico;
+import fatec.poo.model.Pessoa;
 import javax.swing.JOptionPane;
 
 /**
@@ -53,8 +54,8 @@ public class GuiCadastroMedico extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cadastro Médico");
         addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosing(java.awt.event.WindowEvent evt) {
-                formWindowClosing(evt);
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
             }
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
@@ -288,22 +289,27 @@ public class GuiCadastroMedico extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
        prepCon = new PreparaConexao("","");                          
        prepCon.setDriver("net.ucanaccess.jdbc.UcanaccessDriver");
-       prepCon.setConnectionString("jdbc:ucanaccess://F:\\learning_development\\prjPOOHenriqueHenrique\\src\\fatec\\poo\\basededados\\BDClinica.accdb" );
+       prepCon.setConnectionString("jdbc:ucanaccess://C:\\Users\\carva\\Documents\\NetBeansProjects\\prjPOOHenriqueHenrique\\src\\fatec\\poo\\basededados\\BDClinica.accdb");
        daoMedico = new DaoMedico(prepCon.abrirConexao());
     }//GEN-LAST:event_formWindowOpened
-
-    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        prepCon.fecharConexao();
-    }//GEN-LAST:event_formWindowClosing
 
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
         dispose();
     }//GEN-LAST:event_btnSairActionPerformed
 
     private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
-        medico = null;
         
-        medico = daoMedico.consultar(txtCpf.getText().replace(".", "").replace("-", ""));
+        String cpf = txtCpf.getText().replace(".", "").replace("-", ""); 
+        
+        if (!Pessoa.validarCPF(cpf)){
+            JOptionPane.showMessageDialog(this, "O CPF inserido é inválido!", "Erro", JOptionPane.ERROR_MESSAGE);
+            txtCpf.setText(null);
+            txtCpf.requestFocus();
+            return;
+        }
+        
+        medico = null;        
+        medico = daoMedico.consultar(cpf);
         
         if(medico == null) {
             txtCpf.setEnabled(false);
@@ -367,6 +373,10 @@ public class GuiCadastroMedico extends javax.swing.JFrame {
             btnExcluir.setEnabled(false);
         }
     }//GEN-LAST:event_btnExcluirActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        prepCon.fecharConexao();
+    }//GEN-LAST:event_formWindowClosed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

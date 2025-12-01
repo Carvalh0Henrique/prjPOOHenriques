@@ -8,6 +8,7 @@ package fatec.poo.view;
 import fatec.poo.control.DaoPaciente;
 import fatec.poo.control.PreparaConexao;
 import fatec.poo.model.Paciente;
+import fatec.poo.model.Pessoa;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
@@ -152,11 +153,6 @@ public class GuiCadastroPaciente extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        txtCpf.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCpfActionPerformed(evt);
-            }
-        });
 
         try {
             txtDataNascimento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
@@ -164,11 +160,6 @@ public class GuiCadastroPaciente extends javax.swing.JFrame {
             ex.printStackTrace();
         }
         txtDataNascimento.setEnabled(false);
-        txtDataNascimento.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtDataNascimentoActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -265,9 +256,19 @@ public class GuiCadastroPaciente extends javax.swing.JFrame {
     }//GEN-LAST:event_txtPesoActionPerformed
 
     private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
-        paciente = null;
         
-        paciente = daoPaciente.consultar(txtCpf.getText().replace(".", "").replace("-", ""));      
+        String cpf = txtCpf.getText().replace(".", "").replace("-", ""); 
+        
+        if (!Pessoa.validarCPF(cpf)){
+            JOptionPane.showMessageDialog(this, "O CPF inserido é inválido!", "Erro", JOptionPane.ERROR_MESSAGE);
+            txtCpf.setText(null);
+            txtCpf.requestFocus();
+            return;
+        }
+        
+        paciente = null;        
+        paciente = daoPaciente.consultar(cpf);
+        
         if(paciente == null) {
             txtCpf.setEnabled(false);
             txtNome.setEnabled(true);    
@@ -346,17 +347,9 @@ public class GuiCadastroPaciente extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnAlterarActionPerformed
 
-    private void txtCpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCpfActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtCpfActionPerformed
-
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
         dispose();
     }//GEN-LAST:event_btnSairActionPerformed
-
-    private void txtDataNascimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDataNascimentoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtDataNascimentoActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
        prepCon = new PreparaConexao("", "");

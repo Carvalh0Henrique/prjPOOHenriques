@@ -12,6 +12,7 @@ import fatec.poo.control.PreparaConexao;
 import fatec.poo.model.Consulta;
 import fatec.poo.model.Medico;
 import fatec.poo.model.Paciente;
+import fatec.poo.model.Pessoa;
 import javax.swing.JOptionPane;
 
 /**
@@ -275,7 +276,7 @@ public class GuiMarcarConsulta extends javax.swing.JFrame {
             txtCpfMedico.setEnabled(true);
             btnConsultarCpfMedico.setEnabled(true);
             btnConsultar.setEnabled(false);
-
+            txtCpfMedico.requestFocus();
         }else{
            txtCodigo.setText(String.valueOf(consulta.getCodigo()));
            txtData.setText(consulta.getData());
@@ -386,14 +387,23 @@ public class GuiMarcarConsulta extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSairActionPerformed
 
     private void btnConsultarCpfPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarCpfPacienteActionPerformed
-        String cpf = txtCpfPaciente.getText();  
-
-        paciente = daoPaciente.consultar(cpf.replace(".", "").replace("-", ""));
+        
+        String cpf = txtCpfPaciente.getText().replace(".", "").replace("-", ""); 
+        
+        if (!Pessoa.validarCPF(cpf)){
+            JOptionPane.showMessageDialog(this, "O CPF inserido é inválido!", "Erro", JOptionPane.ERROR_MESSAGE);
+            txtCpfPaciente.setText(null);
+            txtCpfPaciente.requestFocus();
+            return;
+        }
+        
+        paciente = null;
+        paciente = daoPaciente.consultar(cpf);
 
         if (paciente == null) {
             javax.swing.JOptionPane.showMessageDialog(this, "Paciente não cadastrado");
             txtCpfPaciente.requestFocus();
-            lblNomePaciente.setText(""); 
+            lblNomePaciente.setText(null); 
         } else {
             lblNomePaciente.setText(paciente.getNome());
 
@@ -408,14 +418,23 @@ public class GuiMarcarConsulta extends javax.swing.JFrame {
     }//GEN-LAST:event_btnConsultarCpfPacienteActionPerformed
 
     private void btnConsultarCpfMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarCpfMedicoActionPerformed
-        String cpf = txtCpfMedico.getText();
+        
+        String cpf = txtCpfMedico.getText().replace(".", "").replace("-", ""); 
+        
+        if (!Pessoa.validarCPF(cpf)){
+            JOptionPane.showMessageDialog(this, "O CPF inserido é inválido!", "Erro", JOptionPane.ERROR_MESSAGE);
+            txtCpfMedico.setText(null);
+            txtCpfMedico.requestFocus();
+            return;
+        }
 
-        medico = daoMedico.consultar(cpf.replace(".", "").replace("-", ""));
+        medico = null;
+        medico = daoMedico.consultar(cpf);
 
         if (medico == null) {
             javax.swing.JOptionPane.showMessageDialog(this, "Médico não cadastrado");
             txtCpfMedico.requestFocus();
-            lblNomeMedico.setText(""); 
+            lblNomeMedico.setText(null); 
         } else {
             lblNomeMedico.setText(medico.getNome());
 

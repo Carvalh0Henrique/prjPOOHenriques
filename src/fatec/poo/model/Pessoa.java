@@ -44,5 +44,43 @@ public class Pessoa {
 
     public String getTelefone() {
         return telefone;
-    }   
+    } 
+    
+    public static boolean validarCPF(String cpf) {
+
+        if (cpf.length() != 11) {
+            return false;
+        }
+
+        if (cpf.chars().distinct().count() == 1) {
+            return false;
+        }
+
+        int somaPrimeiroDigito = 0;
+
+        for (int i = 0; i < 9; i++) {
+            int digito = cpf.charAt(i) - '0';
+            somaPrimeiroDigito += digito * (i + 1);
+        }
+
+        int restoPrimeira = somaPrimeiroDigito % 11;
+        int digitoVerificador1 = (restoPrimeira == 10) ? 0 : restoPrimeira;
+
+        int somaSegundoDigito = 0;
+        int pesoInicial = 11;
+
+        for (int i = 0; i < 9; i++) {
+            int digito = cpf.charAt(i) - '0';
+            somaSegundoDigito += digito * pesoInicial;
+            pesoInicial--;
+        }
+
+        somaSegundoDigito += digitoVerificador1 * 2;
+
+        int restoSegunda = (somaSegundoDigito * 10) % 11;
+        int digitoVerificador2 = (restoSegunda == 10) ? 0 : restoSegunda;
+
+        return digitoVerificador1 == (cpf.charAt(9) - '0') &&
+               digitoVerificador2 == (cpf.charAt(10) - '0');
+    }
 }
