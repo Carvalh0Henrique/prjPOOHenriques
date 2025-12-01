@@ -11,6 +11,7 @@ import fatec.poo.control.PreparaConexao;
 import fatec.poo.model.Consulta;
 import fatec.poo.model.Medicacao;
 import fatec.poo.model.Medico;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -64,7 +65,7 @@ public class GuiPrescreverMedicacao extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Preescrever medicação");
+        setTitle("Prescrever Medicação");
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
                 formWindowClosed(evt);
@@ -168,22 +169,21 @@ public class GuiPrescreverMedicacao extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 92, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(29, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(btnConsultar)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnInserir)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnAlterar)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnExcluir)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnSair)
-                        .addGap(20, 20, 20))
-                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addComponent(jLabel1)
@@ -191,23 +191,26 @@ public class GuiPrescreverMedicacao extends javax.swing.JFrame {
                             .addComponent(jLabel4))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtCodigoConsulta)
+                            .addComponent(txtCodigoConsulta, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)
                             .addComponent(txtNome)
                             .addComponent(txtDosagem)
-                            .addComponent(txtQntDias, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnConsultarMedico)
+                            .addComponent(txtQntDias))
                         .addGap(18, 18, 18)
+                        .addComponent(btnConsultarMedico)
+                        .addGap(14, 14, 14)
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblNomeMedico, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                        .addComponent(lblNomeMedico, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(28, 28, 28))))
         );
+
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnAlterar, btnConsultar, btnExcluir, btnInserir, btnSair});
+
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGap(42, 42, 42)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
@@ -215,26 +218,30 @@ public class GuiPrescreverMedicacao extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
-                            .addComponent(txtCodigoConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5)
-                            .addComponent(btnConsultarMedico)))
-                    .addComponent(lblNomeMedico, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(txtDosagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(txtQntDias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                            .addComponent(txtCodigoConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(txtDosagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(txtQntDias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(42, 42, 42)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblNomeMedico, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(btnConsultarMedico)
+                                .addComponent(jLabel5)))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnConsultar)
                     .addComponent(btnInserir)
                     .addComponent(btnAlterar)
                     .addComponent(btnExcluir)
                     .addComponent(btnSair))
-                .addGap(36, 36, 36))
+                .addContainerGap())
         );
 
         pack();
@@ -257,16 +264,16 @@ public class GuiPrescreverMedicacao extends javax.swing.JFrame {
         String medNome = txtNome.getText();
         medicacao = daoMedicacao.consultar(medNome);
        
-        if(medicacao == null){;
+        if(medicacao == null){
             txtCodigoConsulta.setEnabled(true);
             btnConsultar.setEnabled(false);
             btnConsultarMedico.setEnabled(true);
+            txtCodigoConsulta.requestFocus();
 
         }else{
             consulta = daoMedicacao.buscarConsulta(medNome);
-            medico = daoConsulta.buscarMedicoDaConsulta(consulta.getCodigo());
             
-            lblNomeMedico.setText(String.valueOf(medico.getNome()));
+            lblNomeMedico.setText(consulta.getMedico().getNome());
             txtDosagem.setText(medicacao.getDosagem());
             txtQntDias.setText(String.valueOf(medicacao.getQtdeDias()));
                                         
@@ -277,16 +284,61 @@ public class GuiPrescreverMedicacao extends javax.swing.JFrame {
             txtDosagem.setEnabled(true);
             txtQntDias.setEnabled(true);
             btnAlterar.setEnabled(true);
-            btnExcluir.setEnabled(true);
+            btnExcluir.setEnabled(true);           
         }
     }//GEN-LAST:event_btnConsultarActionPerformed
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
-        // TODO add your handling code here:
+        if (JOptionPane.showConfirmDialog(null, "Confirma Alteração?") == 0){
+            medicacao.setDosagem(txtDosagem.getText());
+            medicacao.setQtdeDias(Integer.parseInt(txtQntDias.getText()));
+
+            daoMedicacao.alterar(medicacao);
+        }
+        
+        txtNome.setText(null);
+        txtCodigoConsulta.setText(null);
+        lblNomeMedico.setText(null);
+        txtDosagem.setText(null);
+        txtQntDias.setText(null);
+        
+        txtNome.setEnabled(true);
+        txtCodigoConsulta.setEnabled(false);
+        btnConsultarMedico.setEnabled(false);
+        txtDosagem.setEnabled(false);
+        txtQntDias.setEnabled(false);
+        
+        btnConsultar.setEnabled(true);
+        btnInserir.setEnabled(false);
+        btnAlterar.setEnabled(false);
+        btnExcluir.setEnabled(false);
+        
+        txtNome.requestFocus();
     }//GEN-LAST:event_btnAlterarActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        // TODO add your handling code here:
+        if (JOptionPane.showConfirmDialog(null, "Confirma Alteração?") == 0){
+            daoMedicacao.excluir(medicacao);
+            
+            txtNome.setText(null);
+            txtCodigoConsulta.setText(null);
+            lblNomeMedico.setText(null);
+            txtDosagem.setText(null);
+            txtQntDias.setText(null);
+
+            txtNome.setEnabled(true);
+            txtCodigoConsulta.setEnabled(false);
+            btnConsultarMedico.setEnabled(false);
+            txtDosagem.setEnabled(false);
+            txtQntDias.setEnabled(false);
+
+            btnConsultar.setEnabled(true);
+            btnInserir.setEnabled(false);
+            btnAlterar.setEnabled(false);
+            btnExcluir.setEnabled(false);
+
+            txtNome.requestFocus();
+        }
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnConsultarMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarMedicoActionPerformed
@@ -294,14 +346,11 @@ public class GuiPrescreverMedicacao extends javax.swing.JFrame {
         consulta = daoConsulta.consultar(Integer.parseInt(txtCodigoConsulta.getText()));
         
         if (consulta == null) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Consulta não cadastrado");
-            txtNome.requestFocus();
-            lblNomeMedico.setText("");
-            txtCodigoConsulta.setText("");
-            txtCodigoConsulta.setEnabled(false);
-            btnConsultar.setEnabled(true);
-            btnConsultarMedico.setEnabled(false);
-            txtNome.requestFocus();
+            javax.swing.JOptionPane.showMessageDialog(this, "Consulta não cadastrada");
+
+            lblNomeMedico.setText(null);
+            txtCodigoConsulta.setText(null);
+            txtCodigoConsulta.requestFocus();
             
         } else {
             lblNomeMedico.setText(consulta.getMedico().getNome());
@@ -311,6 +360,7 @@ public class GuiPrescreverMedicacao extends javax.swing.JFrame {
             txtQntDias.setEnabled(true);
             btnInserir.setEnabled(true);
             btnExcluir.setEnabled(true);
+            txtDosagem.requestFocus();
         }                                                     
 
     }//GEN-LAST:event_btnConsultarMedicoActionPerformed
@@ -318,7 +368,7 @@ public class GuiPrescreverMedicacao extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         prepCon = new PreparaConexao("","");                          
         prepCon.setDriver("net.ucanaccess.jdbc.UcanaccessDriver");
-        prepCon.setConnectionString("jdbc:ucanaccess://F:\\learning_development\\prjPOOHenriqueHenrique\\src\\fatec\\poo\\basededados\\BDClinica.accdb" );
+        prepCon.setConnectionString("jdbc:ucanaccess://C:\\Users\\carva\\Documents\\NetBeansProjects\\prjPOOHenriqueHenrique\\src\\fatec\\poo\\basededados\\BDClinica.accdb");
         daoConsulta = new DaoConsulta(prepCon.abrirConexao());
         daoMedicacao = new DaoMedicacao(prepCon.abrirConexao());
     }//GEN-LAST:event_formWindowOpened
@@ -352,7 +402,7 @@ public class GuiPrescreverMedicacao extends javax.swing.JFrame {
         txtCodigoConsulta.setEnabled(false);
         btnConsultarMedico.setEnabled(false);
         txtDosagem.setEnabled(false);
-        txtQntDias.setEditable(false);
+        txtQntDias.setEnabled(false);
         
         btnConsultar.setEnabled(true);
         btnInserir.setEnabled(false);
