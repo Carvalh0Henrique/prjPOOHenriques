@@ -42,15 +42,17 @@
                           <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="txtNome" pref="433" max="32767" attributes="0"/>
-                          <Component id="txtEndereco" alignment="0" max="32767" attributes="0"/>
-                          <Component id="txtCpf" alignment="0" min="-2" pref="145" max="-2" attributes="0"/>
-                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="txtPeso" alignment="0" max="32767" attributes="0"/>
-                              <Component id="txtAltura" alignment="0" max="32767" attributes="0"/>
-                              <Component id="txtDataNascimento" alignment="0" pref="145" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="txtNome" max="32767" attributes="0"/>
+                              <Component id="txtCpf" alignment="0" min="-2" pref="145" max="-2" attributes="0"/>
+                              <Component id="txtEndereco" alignment="0" pref="482" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
                               <Component id="txtTelefone" alignment="0" max="32767" attributes="0"/>
+                              <Component id="txtDataNascimento" alignment="0" pref="132" max="32767" attributes="0"/>
+                              <Component id="txtAltura" alignment="0" max="32767" attributes="0"/>
+                              <Component id="txtPeso" alignment="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
