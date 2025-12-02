@@ -276,7 +276,11 @@ public class GuiMarcarExame extends javax.swing.JFrame {
         
         if(exame == null) {
             txtCodigoConsulta.setEnabled(true);
+            txtCodigoExame.setEnabled(false);
+            
             btnConsultarMedico.setEnabled(true);
+            btnConsultar.setEnabled(false);
+            
             txtCodigoConsulta.requestFocus();
         } else {
             txtCodigoConsulta.setText(String.valueOf(exame.getConsulta().getCodigo()));
@@ -286,18 +290,23 @@ public class GuiMarcarExame extends javax.swing.JFrame {
             txtHorario.setText(exame.getHorario());
             txtValor.setText(String.valueOf(exame.getValor()));
             
+            txtCodigoExame.setEnabled(false);
             txtDescricao.setEnabled(true);
             txtData.setEnabled(true);
             txtHorario.setEnabled(true);
             txtValor.setEnabled(true);
+            
+            btnConsultar.setEnabled(false);
             btnAlterar.setEnabled(true);
             btnExcluir.setEnabled(true);
+            
+            txtDescricao.requestFocus();
         }
     }//GEN-LAST:event_btnConsultarActionPerformed
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
         if (JOptionPane.showConfirmDialog(null, "Confirma Alteração?") == 0){
-            exame = new Exame(Integer.parseInt(txtCodigoExame.getText()), txtDescricao.getText());
+            exame.setDescricao(txtDescricao.getText());
             exame.setData(txtData.getText());
             exame.setHorario(txtHorario.getText());
             exame.setValor(Double.parseDouble(txtValor.getText()));
@@ -314,6 +323,13 @@ public class GuiMarcarExame extends javax.swing.JFrame {
         txtHorario.setText(null);
         txtValor.setText(null);
         
+        txtCodigoExame.setEnabled(true);
+        txtDescricao.setEnabled(false);
+        txtData.setEnabled(false);
+        txtHorario.setEnabled(false);
+        txtValor.setEnabled(false);
+        
+        btnConsultar.setEnabled(true);
         btnAlterar.setEnabled(false);
         btnExcluir.setEnabled(false);
     }//GEN-LAST:event_btnAlterarActionPerformed
@@ -321,19 +337,25 @@ public class GuiMarcarExame extends javax.swing.JFrame {
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         if(JOptionPane.showConfirmDialog(null, "Confirma Exclusão?") == 0){
             daoExame.excluir(exame);
-        }
-        
-        txtCodigoExame.setText(null);
-        txtCodigoConsulta.setText(null);
-        lblNomeMedico.setText(null);
-        txtDescricao.setText(null);
-        txtData.setText(null);
-        txtHorario.setText(null);
-        txtValor.setText(null);
-        
-        btnAlterar.setEnabled(false);
-        btnExcluir.setEnabled(false);
-        
+            
+            txtCodigoExame.setText(null);
+            txtCodigoConsulta.setText(null);
+            lblNomeMedico.setText(null);
+            txtDescricao.setText(null);
+            txtData.setText(null);
+            txtHorario.setText(null);
+            txtValor.setText(null);
+            
+            txtCodigoExame.setEnabled(true);
+            txtDescricao.setEnabled(false);
+            txtData.setEnabled(false);
+            txtHorario.setEnabled(false);
+            txtValor.setEnabled(false);
+
+            btnConsultar.setEnabled(true);
+            btnAlterar.setEnabled(false);
+            btnExcluir.setEnabled(false);
+        }        
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
@@ -343,7 +365,7 @@ public class GuiMarcarExame extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         prepCon = new PreparaConexao("","");                          
         prepCon.setDriver("net.ucanaccess.jdbc.UcanaccessDriver");
-        prepCon.setConnectionString("jdbc:ucanaccess://F:\\learning_development\\DimasUltimaVersao\\prjPOOHenriqueHenrique\\src\\fatec\\poo\\basededados\\BDClinica.accdb" );
+        prepCon.setConnectionString("jdbc:ucanaccess://C:\\Users\\carva\\Documents\\NetBeansProjects\\prjPOOHenriqueHenrique\\src\\fatec\\poo\\basededados\\BDClinica.accdb");
         daoExame = new DaoExame(prepCon.abrirConexao());
         daoConsulta = new DaoConsulta(prepCon.abrirConexao());
     }//GEN-LAST:event_formWindowOpened

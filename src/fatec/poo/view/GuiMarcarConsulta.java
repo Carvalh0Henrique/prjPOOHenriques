@@ -263,7 +263,7 @@ public class GuiMarcarConsulta extends javax.swing.JFrame {
         consulta = null;
         int valCodConsulta = Integer.parseInt(txtCodigo.getText());
         consulta = daoConsulta.consultar(valCodConsulta);
-       
+        txtCodigo.setEnabled(false);
         if(consulta == null){
             txtCpfMedico.setEnabled(true);
             btnConsultarCpfMedico.setEnabled(true);
@@ -308,6 +308,7 @@ public class GuiMarcarConsulta extends javax.swing.JFrame {
         txtData.setText(null);
         txtValor.setText(null);
         
+        txtCodigo.setEnabled(true);
         txtData.setEnabled(false);
         txtValor.setEnabled(false);
         

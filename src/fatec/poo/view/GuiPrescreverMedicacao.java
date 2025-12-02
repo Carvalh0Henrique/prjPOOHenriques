@@ -359,7 +359,6 @@ public class GuiPrescreverMedicacao extends javax.swing.JFrame {
             txtDosagem.setEnabled(true);
             txtQntDias.setEnabled(true);
             btnInserir.setEnabled(true);
-            btnExcluir.setEnabled(true);
             txtDosagem.requestFocus();
         }                                                     
 
@@ -390,7 +389,7 @@ public class GuiPrescreverMedicacao extends javax.swing.JFrame {
         medicacao = new Medicacao(txtNome.getText());
         medicacao.setDosagem(txtDosagem.getText());
         medicacao.setQtdeDias(Integer.parseInt(txtQntDias.getText()));
-        
+        consulta.addMedicacao(medicacao);
         daoMedicacao.inserir(medicacao, consulta);
         
         txtNome.setText(null);

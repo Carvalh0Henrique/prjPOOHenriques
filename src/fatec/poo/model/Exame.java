@@ -21,6 +21,11 @@ public class Exame {
     
     
     //SETTERS
+    
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
     public void setData(String data) {
         this.data = data;
     }
